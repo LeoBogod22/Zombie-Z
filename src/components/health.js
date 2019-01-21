@@ -25,6 +25,7 @@ class Health extends Component {
       isLoaded2: true,
     };
 
+        this.hello= this.hello.bind(this);
     this.getplace = this.getplace.bind(this);
   }
 
@@ -32,6 +33,13 @@ class Health extends Component {
     this.setState({ isLoaded: true });
 
     this.props.showhealth();
+  }
+
+  hello(name , vicinity){
+     this.setState({vicinity: vicinity});
+   this.setState({info: name});
+console.log(name);
+console.log(this.state.info);
   }
   componentDidMount() {
     var param = {
