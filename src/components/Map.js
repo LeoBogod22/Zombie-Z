@@ -204,8 +204,8 @@ export default class Map extends Component {
         }}
          center={this.props.center} defaultZoom={this.props.zoom}>
         <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
+                    lat={this.props.center.latitude}
+            lng={this.props.center.longitude}
             text={'Kreyser Avrora'}
           />
         </GoogleMapReact>
