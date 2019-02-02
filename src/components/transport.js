@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import PlacesAutocomplete from 'react-places-autocomplete';
-
 import App from '../App.js';
+
+import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
 
-class Health extends Component {
+import Nav from './nav.js';
+// import Home from './Home.js';
+
+class Transport extends Component {
   constructor() {
     super();
     this.state = {
@@ -21,12 +24,15 @@ class Health extends Component {
       marker: [],
       places: [],
       isLoaded: false,
+      info: '',
+      vicinity: '',
       places2: [],
       isLoaded2: true,
     };
 
-    this.hello = this.hello.bind(this);
     this.getplace = this.getplace.bind(this);
+
+    this.hello = this.hello.bind(this);
   }
 
   getplace() {
@@ -41,6 +47,12 @@ class Health extends Component {
     console.log(name);
     console.log(this.state.info);
   }
+
+  // run
+  componentWillReceiveProps(newProps) {
+    console.log(newProps);
+  }
+
   componentDidMount() {
     var param = {
       lat: this.props.latitude,
@@ -48,12 +60,12 @@ class Health extends Component {
       temp: 1,
     };
     axios
-      .post(`http://localhost:5000/search-champ2`, {
+      .post(`http://localhost:3000/search-trans`, {
         param,
       })
       .then(data => {
-        console.log("hello", this.state.places);
-        console.log("server response",data);
+        console.log(this.state.places);
+        console.log(data);
         var datalist = [];
         const places = data.data.data[0].results.slice(0, 10).map(place => {
           console.log(place.name);
@@ -69,12 +81,13 @@ class Health extends Component {
                 <li>
                   <a onClick={() => this.hello(name, vicinity)}> {place.name} </a>{' '}
                 </li>
+
               </ul>
             </div>
           );
         });
-   
-        console.log('places', datalist);
+
+
         this.props.toShowMarkerFN(datalist);
         const places2 = data.data.data[1].results.slice(0, 10).map(place => {
           console.log(place.name);
@@ -91,6 +104,7 @@ class Health extends Component {
                   <a onClick={() => this.hello(name, vicinity)}> {place.name} </a>{' '}
                 </li>
               </ul>
+
             </div>
           );
         });
@@ -101,6 +115,7 @@ class Health extends Component {
       });
   }
 
+
   render() {
     return (
       <div>
@@ -109,12 +124,24 @@ class Health extends Component {
 
         {this.state.isLoaded ? (
           // <div id="location-basic-info">
+
           <div>
-            {this.state.places}{' '}
+            {this.state.places} {' '}
             <br></br>
-            <p> there were plenty of health packs nearby but you could only carry 10 </p>
+            <h4> there were plenty of food sources nearby <br></br><br></br> but you could only carry 10 </h4>
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <h3 id="name"> {this.state.info} </h3>
+
+            <br></br>
+            <h3 id="address"> {this.state.vicinity} </h3>
           </div>
         ) : (
+
+
             // </div>
             <div>.</div>
           )}
@@ -123,4 +150,4 @@ class Health extends Component {
   }
 }
 
-export default Health;
+export default Transport;

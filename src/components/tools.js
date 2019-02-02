@@ -32,7 +32,7 @@ class Tool extends Component {
 
     this.getplace = this.getplace.bind(this);
 
-    this.hello= this.hello.bind(this);
+    this.hello = this.hello.bind(this);
   }
 
   getplace() {
@@ -41,11 +41,11 @@ class Tool extends Component {
     this.props.showhealth();
   }
 
-  hello(name , vicinity){
-     this.setState({vicinity: vicinity});
-   this.setState({info: name});
-console.log(name);
-console.log(this.state.info);
+  hello(name, vicinity) {
+    this.setState({ vicinity: vicinity });
+    this.setState({ info: name });
+    console.log(name);
+    console.log(this.state.info);
   }
 
   // run
@@ -60,18 +60,18 @@ console.log(this.state.info);
       temp: 1,
     };
     axios
-      .post(`http://localhost:5000/search-champs`, {
+      .post(`http://localhost:3000/search-champs`, {
         param,
       })
       .then(data => {
         console.log(this.state.places);
         console.log(data);
-
+        var datalist = [];
         const places = data.data.data[0].results.slice(0, 10).map(place => {
           console.log(place.name);
           console.log(place.geometry.location.lat);
           console.log(place.geometry.location.lng);
-
+          datalist.push({ lat: place.geometry.location.lat, lng: place.geometry.location.lng })
           let name = place.name;
           let vicinity = place.vicinity;
 
@@ -87,7 +87,8 @@ console.log(this.state.info);
           );
         });
 
-        console.log('places', places);
+
+        this.props.toShowMarkerFN(datalist);
         const places2 = data.data.data[1].results.slice(0, 10).map(place => {
           console.log(place.name);
           console.log(place.geometry.location.lat);
@@ -126,24 +127,24 @@ console.log(this.state.info);
 
           <div>
             {this.state.places} {' '}
-<br></br>
-             <h4> there were plenty of food sources nearby <br></br><br></br> but you could only carry 10 </h4>
+            <br></br>
+            <h4> there were plenty of food sources nearby <br></br><br></br> but you could only carry 10 </h4>
 
-                 <br></br>
-                 <br></br>
-                 <br></br>
-                 <br></br>
-              <h3 id="name"> {this.state.info} </h3>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <h3 id="name"> {this.state.info} </h3>
 
-                 <br></br>
-              <h3 id="address"> {this.state.vicinity} </h3>
+            <br></br>
+            <h3 id="address"> {this.state.vicinity} </h3>
           </div>
         ) : (
 
 
-          // </div>
-          <div>.</div>
-        )}
+            // </div>
+            <div>.</div>
+          )}
       </div>
     );
   }

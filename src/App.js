@@ -12,6 +12,7 @@ import Home from './components/Home.js';
 import Food from './components/food.js';
 import Health from './components/health.js';
 
+import Transport from './components/transport.js';
 import Tool from './components/tools.js';
 import MapContainer from './components/Map.js';
 import Map from './components/Map.js';
@@ -52,7 +53,8 @@ class App extends Component {
         <Router>
           <Switch>
             {/* <Route path="/health" component={Health} />
-            <Route path="/food" component={Food} /> 
+            <Route path="/food" component={Food} />
+              <Route path="/transport" component={Transport} />
                  <Route path="/tool" component={Tool} /> */}
             <Route path="/" component={Home} />
           </Switch>

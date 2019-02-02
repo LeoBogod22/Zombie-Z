@@ -17,6 +17,12 @@ border: 2.5px solid #8a7f7f;
 .App-title {
   font-size: 1.5em;
 }
+
+#s{
+  font-size: 17px;
+      font-family: monospace;
+      color: rgba(234, 192, 192, 0.58);
+}
 h1 {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 48px;

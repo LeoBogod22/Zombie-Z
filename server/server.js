@@ -11,6 +11,7 @@ app.use(cors()); //added by hu
 require('./api/getplaces')(app);
 require('./api/getplaces2')(app);
 require('./api/getplaces3')(app);
+require('./api/getplaces4')(app);
 require('./api/data')(app);
 app.get('/', (req, res) => {
   res.send('PORT 5000');

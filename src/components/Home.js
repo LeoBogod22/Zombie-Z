@@ -11,6 +11,7 @@ import marker from './marker.png';
 import Nav from './nav';
 import Food from './food';
 
+import Transport from './transport';
 import Tool from './tools';
 import Health from './health';
 import MapContainer from './Map';
@@ -34,7 +35,8 @@ class Home extends Component {
       place_id: '',
       place_location: '',
       address: '',
-      value:'',
+      value: '',
+      survival: '',
       latitude: 37.774929,
       longitude: -122.419416,
       marker: [],
@@ -43,7 +45,11 @@ class Home extends Component {
       places2: [],
       isLoaded: false,
       isLoaded3: false,
+      toShowMarker: [],
     };
+  }
+  toShowMarkerFN = (data) => {
+    this.setState({ toShowMarker: data })
   }
 
   handleChange = address => {
@@ -96,7 +102,7 @@ class Home extends Component {
     console.log(this.state.latitude);
     console.log(this.state.longitude);
 
-     var param = {
+    var param = {
       lat: this.state.latitude,
       long: this.state.longitude,
       temp: 1,
@@ -107,13 +113,15 @@ class Home extends Component {
       })
       .then(data => {
         console.log(data);
-         
-            console.log(data.data.data[0].statistics.population_density.value)
- 
- this.setState({ value: data.data.data[0].statistics.population_density.value });
 
-    });
-  
+        console.log(data.data.data[0].statistics.population_density.value)
+
+        this.setState({ value: data.data.data[0].statistics.population_density.value });
+
+        this.setState({ survival: this.state.value/10*50});
+
+      });
+
   };
 
   handleCloseClick = () => {
@@ -197,7 +205,7 @@ class Home extends Component {
         </div>
 
         <div id="h">
-          <Map center={{ lat: this.state.latitude, lng: this.state.longitude }} />
+          <Map toShowMarker={this.state.toShowMarker} center={{ lat: this.state.latitude, lng: this.state.longitude }} />
           {/* <div id="location-basic-info" /> */}
           {this.state.isLoaded ? (
             <div id="location-basic-info">
@@ -207,25 +215,29 @@ class Home extends Component {
                   Latitude={this.state.latitude}
                   Longitude={this.state.longitude}
                   density={this.state.value}
+                  survivial={this.state.survival}
 
                 />
               ) : null}
 
               {window.location.pathname === '/health' ? (
-                <Health style={{ display: 'none' }} latitude={this.state.latitude} longitude={this.state.longitude} />
+                <Health style={{ display: 'none' }} toShowMarkerFN={this.toShowMarkerFN} latitude={this.state.latitude} longitude={this.state.longitude} />
               ) : null}
 
               {window.location.pathname === '/food' ? (
-                <Food latitude={this.state.latitude} longitude={this.state.longitude} />
+                <Food toShowMarkerFN={this.toShowMarkerFN} latitude={this.state.latitude} longitude={this.state.longitude} />
               ) : null}
-               {window.location.pathname === '/tool' ? (
-                <Tool latitude={this.state.latitude} longitude={this.state.longitude} />
+              {window.location.pathname === '/tool' ? (
+                <Tool toShowMarkerFN={this.toShowMarkerFN} latitude={this.state.latitude} longitude={this.state.longitude} />
+              ) : null}
+              {window.location.pathname === '/transport' ? (
+                <Transport toShowMarkerFN={this.toShowMarkerFN} latitude={this.state.latitude} longitude={this.state.longitude} />
               ) : null}
               <Nav />
             </div>
           ) : (
-            <div>.</div>
-          )}
+              <div>.</div>
+            )}
         </div>
 
         <div />
