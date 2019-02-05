@@ -40,11 +40,11 @@ class Nav extends Component {
             <Link to="/health">Health</Link>
           </li>
              <li class="nav-item">
-            <Link to="/tool">tools</Link>
+            <Link to="/tool">Tools & Hardware</Link>
           </li>
 
           <li class="nav-item">
-         <Link to="/transport">tools</Link>
+         <Link to="/transport">Transportation</Link>
        </li>
         </ul>
       </div>

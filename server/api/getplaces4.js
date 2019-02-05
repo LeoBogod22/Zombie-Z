@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 module.exports = (app) => {
 
   app.post('/search-trans', (req, res) => {
-
+    console.log("receiving...");
     console.log(req);
     let lat = req.body.param.lat;//before: req.query.lat it's wrong
 

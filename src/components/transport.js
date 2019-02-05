@@ -60,7 +60,7 @@ class Transport extends Component {
       temp: 1,
     };
     axios
-      .post(`http://localhost:3000/search-trans`, {
+      .post(`http://localhost:5000/search-trans`, {
         param,
       })
       .then(data => {
@@ -79,7 +79,7 @@ class Transport extends Component {
             <div class="col-xs-6 col-sm-6">
               <ul id="places-list">
                 <li>
-                  <a onClick={() => this.hello(name, vicinity)}> {place.name} </a>{' '}
+                  <a href="#places-list" onClick={() => this.hello(name, vicinity)}> {place.name} </a>{' '}
                 </li>
 
               </ul>
@@ -89,7 +89,7 @@ class Transport extends Component {
 
 
         this.props.toShowMarkerFN(datalist);
-        const places2 = data.data.data[1].results.slice(0, 10).map(place => {
+        const places2 = data.data.data[1].results.slice(0, 15).map(place => {
           console.log(place.name);
           console.log(place.geometry.location.lat);
           console.log(place.geometry.location.lng);
