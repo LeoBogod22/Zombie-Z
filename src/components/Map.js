@@ -2,13 +2,30 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import marker from './marker.png';
 import { geolocated } from 'react-geolocated';
-const AnyReactComponent = ({ text }) => (
-    <div>
-        <img src={marker} style={{ height: '50px', width: '40px' }} />
+// const AnyReactComponent = ({ text }) => (
+//     <div>
+//         <img src={marker} style={{ height: '50px', width: '40px' }} />
+//     </div>
+// );
+
+const AnyReactComponent = (props) => {
+    function setAddress(data) {
+        var a = document.getElementById(data);
+        if (a.style.display === 'none') {
+            a.style.display = 'block'
+        }
+        else {
+            a.style.display = 'none'
+        }
+    }
+    return <div>
+
+        <img className="markerHover" src={marker} onClick={() => { setAddress(props.id) }} style={{ height: '50px', width: '50px' }} />
+        <br />
+        <p style={{ display: 'none', color: '#4bbd4b', width: 400, fontSize: 20, fontWeight: 'bold', textAlign: 'justify', }} className="jan" id={props.id} >{props.place}</p>
+
     </div>
-);
-
-
+};
 
 const ExampleMapStyles =
     [
@@ -205,20 +222,22 @@ export default class Map extends Component {
 
     render() {
         return (
-            <div className="google-map" style={{ width: '100%', height: '2000px', backgroundColor: 'red' }}>
+            <div className="google-map cust-map-setting">
                 <GoogleMapReact
                     options={{
                         styles: ExampleMapStyles
                     }}
                     center={this.props.center} defaultZoom={this.props.zoom}>
                     {this.props.toShowMarker.length > 0 ?
-                        this.props.toShowMarker.map((data) => {
-                            return <AnyReactComponent
+                        this.props.toShowMarker.map((data, index) => {
+                            return <AnyReactComponent key={index}
                                 // lat: place.geometry.location.lat,
                                 //  lng: place.geometry.location.lng
                                 lat={data.lat}
                                 lng={data.lng}
                                 text={'Kreyser Avrora'}
+                                id={index}
+                                place={data.place}
                             />
                         }) : ''}
 
