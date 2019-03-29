@@ -198,8 +198,7 @@ class Home extends Component {
               }}
             </PlacesAutocomplete>
           </section>
-
-          <div id="app">
+           <div id="section">
             <div id="map" />
           </div>
         </div>
