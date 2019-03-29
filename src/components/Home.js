@@ -40,6 +40,7 @@ class Home extends Component {
       latitude: 37.774929,
       longitude: -122.419416,
       marker: [],
+      loading: true,
       place: [],
       isLoaded2: false,
       places2: [],
