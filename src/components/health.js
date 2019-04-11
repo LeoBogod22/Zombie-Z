@@ -48,7 +48,7 @@ class Health extends Component {
       temp: 1,
     };
     axios
-      .post(`http://localhost:5000/search-champ2`, {
+      .post(`https://zombie-2019.herokuapp.com//search-champ2`, {
         param,
       })
       .then(data => {
