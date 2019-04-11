@@ -10,7 +10,7 @@ module.exports = (app) => {
     let long = req.body.param.long;
     console.log(lat);
 
-    const apiId = 'AIzaSyAeEPop5mofzDJhytOEMtxXaGWFqGB4Q3M';
+    const apiId = process.env.API_KEY;;
     const urls = [
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + long + '&rankby=distance&type=bus_station&key=AIzaSyAeEPop5mofzDJhytOEMtxXaGWFqGB4Q3M',
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + long + '&rankby=distance&type=train_station&key=AIzaSyAeEPop5mofzDJhytOEMtxXaGWFqGB4Q3M'
