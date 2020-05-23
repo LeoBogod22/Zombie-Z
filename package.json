@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://github.com/LeoBogod22/Trak",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "cors": "^2.8.4",
     "google-map-react": "^1.0.4",
     "google-maps-react": "^2.0.2",
